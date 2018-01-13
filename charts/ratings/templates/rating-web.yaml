@@ -15,11 +15,11 @@ spec:
         image: "{{.Values.web.image}}:{{.Values.web.imageTag}}"
         env:
         - name: API
-          value: http://heroes-api.redshirt.io/api
+          value: https://heroes-api.redshirt.io/api
         - name: HEROES
-          value: http://heroes.redshirt.io/static/data/heroes.json
+          value: https://heroes.redshirt.io/static/data/heroes.json
         - name: SITE
-          value: http://heroes.redshirt.io/static/data/site.json
+          value: https://heroes.redshirt.io/static/data/site.json
         - name: KUBE_NODE_NAME
           valueFrom:
             fieldRef:
