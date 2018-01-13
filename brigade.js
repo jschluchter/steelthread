@@ -79,7 +79,7 @@ function helmJobRunner (config, h, deployType) {
     /// for steelthread ratings web demo, this doesn't require cd'ing into src, as the chart/ratings is at '.' Just in case, I '..' after cd'ing.
     h.tasks = [
         "cd /src/",
-        `helm upgrade --install ratings ../charts/ratings --set api.image=${config.get("apiACRImage")} --set api.imageTag=${config.get("imageTag")} --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
+        `helm upgrade --install ratings charts/ratings --set api.image=${config.get("apiACRImage")} --set api.imageTag=${config.get("imageTag")} --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
     ]
 }
 
