@@ -75,7 +75,7 @@ function dockerJobRunner(config, d) {
 
 function helmJobRunner (config, h, deployType) {
     h.storage.enabled = false
-    h.image = "lachlanevenson/k8s-helm:2.7.2"
+    h.image = "lachlanevenson/k8s-helm:latest"
     /// for steelthread ratings web demo, this doesn't require cd'ing into src, as the chart/ratings is at '.' Just in case, I '..' after cd'ing.
     h.tasks = [
         "cd /src/",
