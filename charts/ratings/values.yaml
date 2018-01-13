@@ -1,0 +1,10 @@
+# Default values for chart
+
+web:
+  name: rating-web
+  deployment: rating-web-prod
+  versionLabel: prod
+  replicas: 1
+  image: "chzbrgr71/rating-web"
+  imageTag: "v6"
+  serviceType: "LoadBalancer"
