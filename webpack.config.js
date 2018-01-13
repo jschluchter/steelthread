@@ -63,6 +63,18 @@ module.exports = {
       index: '/dist/'
     },
   },
+  devServer: {
+    disableHostCheck: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    host: '0.0.0.0',
+    port: 8080,
+    noInfo: true,
+    historyApiFallback: {
+      index: '/dist/'
+    },
+  },
   devtool: '#eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({

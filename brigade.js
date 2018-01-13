@@ -8,8 +8,8 @@ events.on("push", (brigadeEvent, project) => {
     brigConfig.set("acrServer", project.secrets.acrServer)
     brigConfig.set("acrUsername", project.secrets.acrUsername)
     brigConfig.set("acrPassword", project.secrets.acrPassword)
-    brigConfig.set("webImage", "chzbrgr71/rating-web")
-    brigConfig.set("apiImage", "chzbrgr71/rating-api")
+    brigConfig.set("webImage", "squillace/steelthread")
+    // brigConfig.set("apiImage", "chzbrgr71/rating-api")
     brigConfig.set("gitSHA", brigadeEvent.commit.substr(0,7))
     brigConfig.set("eventType", brigadeEvent.type)
     brigConfig.set("branch", getBranch(gitPayload))
@@ -64,11 +64,11 @@ function dockerJobRunner(config, d) {
         `docker login ${config.get("acrServer")} -u ${config.get("acrUsername")} -p ${config.get("acrPassword")}`,
         `docker build --build-arg BUILD_DATE='1/1/2017 5:00' --build-arg IMAGE_TAG_REF=${config.get("imageTag")} --build-arg VCS_REF=${config.get("gitSHA")} -t ${config.get("webImage")} .`,
         "cd ../rating-api/",
-        `docker build --build-arg BUILD_DATE='1/1/2017 5:00' --build-arg IMAGE_TAG_REF=${config.get("imageTag")} --build-arg VCS_REF=${config.get("gitSHA")} -t ${config.get("apiImage")} .`,
+        // `docker build --build-arg BUILD_DATE='1/1/2017 5:00' --build-arg IMAGE_TAG_REF=${config.get("imageTag")} --build-arg VCS_REF=${config.get("gitSHA")} -t ${config.get("apiImage")} .`,
         `docker tag ${config.get("webImage")} ${config.get("webACRImage")}:${config.get("imageTag")}`,
-        `docker tag ${config.get("apiImage")} ${config.get("apiACRImage")}:${config.get("imageTag")}`,
+        //`docker tag ${config.get("apiImage")} ${config.get("apiACRImage")}:${config.get("imageTag")}`,
         `docker push ${config.get("webACRImage")}:${config.get("imageTag")}`,
-        `docker push ${config.get("apiACRImage")}:${config.get("imageTag")}`,
+        //`docker push ${config.get("apiACRImage")}:${config.get("imageTag")}`,
         "killall dockerd"
     ]
 }
@@ -76,9 +76,10 @@ function dockerJobRunner(config, d) {
 function helmJobRunner (config, h, deployType) {
     h.storage.enabled = false
     h.image = "lachlanevenson/k8s-helm:2.7.2"
+    /// for steelthread ratings web demo, this doesn't require cd'ing into src, as the chart/ratings is at '.' Just in case, I '..' after cd'ing.
     h.tasks = [
         "cd /src/",
-        `helm upgrade --install ratings ./charts/ratings --set api.image=${config.get("apiACRImage")} --set api.imageTag=${config.get("imageTag")} --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
+        `helm upgrade --install ratings ../charts/ratings --set api.image=${config.get("apiACRImage")} --set api.imageTag=${config.get("imageTag")} --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
     ]
 }
 
