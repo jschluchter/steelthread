@@ -5,7 +5,7 @@ ARG BUILD_DATE
 ARG IMAGE_TAG_REF
 
 # Metadata
-LABEL maintainer="brianisrunning@gmail.com"
+LABEL maintainer="ralph.squillace@microsoft.com"
 LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.name="Ratings Web App" \
       org.label-schema.description="Simple node web app" \
