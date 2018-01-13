@@ -9,9 +9,9 @@ LABEL maintainer="brianisrunning@gmail.com"
 LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.name="Ratings Web App" \
       org.label-schema.description="Simple node web app" \
-      org.label-schema.vcs-url="https://github.com/chzbrgr71/steelthread" \
+      org.label-schema.vcs-url="https://github.com/squillace/steelthread" \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.docker.dockerfile="/rating-web/Dockerfile"
+      org.label-schema.docker.dockerfile="./Dockerfile"
 
 ENV GIT_SHA $VCS_REF
 ENV IMAGE_BUILD_DATE $BUILD_DATE
