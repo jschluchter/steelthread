@@ -53,11 +53,13 @@ module.exports = {
     }
   },
   devServer: {
+    disableHostCheck: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
     host: '0.0.0.0',
     port: 8080,
+    public: 'heroes.redshirt.io',
     noInfo: true,
     historyApiFallback: {
       index: '/dist/'
